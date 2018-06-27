@@ -53,6 +53,9 @@ public class KubernetesCrudDispatcher extends CrudDispatcher {
     MockResponse response = new MockResponse();
     List<String> items = new ArrayList<>();
     AttributeSet query = attributeExtractor.extract(path);
+    System.out.println("Handling get for: " + path);
+    System.out.println("Looking for: " + query);
+    System.out.println("Map has: " + map);
 
     for (Map.Entry<AttributeSet, String> entry : map.entrySet()) {
       if (entry.getKey().matches(query)) {
@@ -78,7 +81,7 @@ public class KubernetesCrudDispatcher extends CrudDispatcher {
   public MockResponse handleCreate(String path, String s) {
     System.out.println("handleCreate: " + path);
     MockResponse result = super.handleCreate(path, s);
-    System.out.println("handledCreate: " + path);
+    System.out.println("handledCreate, map now " + map);
     return result;
   }
 }
