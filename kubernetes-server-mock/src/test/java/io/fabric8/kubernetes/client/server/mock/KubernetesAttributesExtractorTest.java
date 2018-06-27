@@ -151,4 +151,16 @@ public class KubernetesAttributesExtractorTest {
     Assert.assertTrue("Expected " + attributes + " to match " + expected, attributes.matches(expected));
   }
 
+  @Test
+  public void shouldHandleDashes() {
+    KubernetesAttributesExtractor extractor = new KubernetesAttributesExtractor();
+    AttributeSet attributes = extractor.extract("/apis/test.com/v1/namespaces/my-namespace/crds/my-dashed-type");
+
+    AttributeSet expected = new AttributeSet();
+    expected = expected.add(new Attribute("kind", "crd"));
+    expected = expected.add(new Attribute("namespace", "my-namespace"));
+    expected = expected.add(new Attribute("name", "my-dashed-type"));
+    Assert.assertTrue("Expected " + attributes + " to match " + expected, attributes.matches(expected));
+  }
+
 }

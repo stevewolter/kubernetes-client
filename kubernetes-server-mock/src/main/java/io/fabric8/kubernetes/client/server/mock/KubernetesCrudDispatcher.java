@@ -75,4 +75,10 @@ public class KubernetesCrudDispatcher extends CrudDispatcher {
     return response;
   }
 
+  public MockResponse handleCreate(String path, String s) {
+    System.out.println("handleCreate: " + path);
+    MockResponse result = super.handleCreate(path, s);
+    System.out.println("handledCreate: " + path);
+    return result;
+  }
 }

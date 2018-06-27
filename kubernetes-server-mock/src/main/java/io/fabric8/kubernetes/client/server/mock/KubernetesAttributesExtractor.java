@@ -50,6 +50,7 @@ public class KubernetesAttributesExtractor implements AttributeExtractor<HasMeta
   @Override
   public AttributeSet fromPath(String s) {
     if (s == null || s.isEmpty()) {
+      System.out.println("No attributes from empty path");
       return new AttributeSet();
     }
 
@@ -57,9 +58,11 @@ public class KubernetesAttributesExtractor implements AttributeExtractor<HasMeta
     Matcher m = PATTERN.matcher(s);
     if (m.matches()) {
       AttributeSet set = extract(m);
+      System.out.println("fromPath " + s + " yielded " + set);
       LOGGER.debug("fromPath {} : {}", s, set);
       return set;
     }
+    System.out.println("Path " + s + " did not match");
     return new AttributeSet();
   }
 
